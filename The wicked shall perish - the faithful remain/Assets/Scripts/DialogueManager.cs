@@ -32,6 +32,7 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
+   
     public void DisplayNextSentence ()
     {
         if (sentences.Count == 0)
@@ -40,11 +41,21 @@ public class DialogueManager : MonoBehaviour
             return;
         }
         string sentence = sentences.Dequeue();
-        dialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
+       // dialogueText.text = sentence;
         Debug.Log(sentence);
     }
-
-     void EndDialogue ()
+    IEnumerator TypeSentence(string sentence)
+    {
+        dialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueText.text += letter;
+            yield return null;
+        }
+    }
+    void EndDialogue ()
     {
         Debug.Log("End of the converstation.");
     }
