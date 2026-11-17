@@ -1713,11 +1713,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1750513767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74d80de150b070f4a9617c3057562655, type: 3}
+  m_Script: {fileID: 11500000, guid: bcfa915f046079a4d831e9dd8aa67af8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
-  nameText: {fileID: 1691592739}
-  dialogueText: {fileID: 559598027}
 --- !u!4 &1750513769
 Transform:
   m_ObjectHideFlags: 0
