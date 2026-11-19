@@ -35,7 +35,7 @@ public class GlobalResources : MonoBehaviour
     public TextMeshProUGUI hereticLabel;
 
     float nextTimeCheck = 1;
-    float HereticMultiplier = 0.01f;
+    float HereticMultiplier = 0.1f;
     float FaithPerCitizen = 2;
 
     private void Update()
@@ -112,7 +112,7 @@ public class GlobalResources : MonoBehaviour
 
     public void HereticGen()
     {
-        hereticCount += populationCount * HereticMultiplier;
+        hereticCount = populationCount * HereticMultiplier;
     }
 
 }
