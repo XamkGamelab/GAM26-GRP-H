@@ -37,6 +37,7 @@ public class GlobalResources : MonoBehaviour
     float nextTimeCheck = 1;
     float HereticMultiplier = 0.1f;
     float FaithPerCitizen = 2;
+    
 
     private void Update()
     {
@@ -80,14 +81,15 @@ public class GlobalResources : MonoBehaviour
     }
     public void FaithGen()
     {
-       faithCount = populationCount * FaithPerCitizen;
-        faithCount -= hereticCount;
+       //faithCount += populationCount * FaithPerCitizen;
+       faithCount+=2;
+        //faithCount -= hereticCount;
     }
 
     public void PopulationGen()
     {
         populationCount++;
-        
+        //faithCount += FaithPerCitizen;
     }
 
     public void MoneyGen()
@@ -113,6 +115,7 @@ public class GlobalResources : MonoBehaviour
     public void HereticGen()
     {
         hereticCount = populationCount * HereticMultiplier;
+        hereticCount -= militiaCount;
     }
 
 }
