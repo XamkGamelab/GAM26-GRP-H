@@ -1,50 +1,74 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.Assemblies;
 
 public class Upgrades : MonoBehaviour
 {
     [Header("Components")]
-    public TextMeshProUGUI priceText;
+    public TextMeshProUGUI faithPriceText;
+    public TextMeshProUGUI populationPriceText;
     public TextMeshProUGUI incomeInfoText;
 
     [Header("Generator values")]
-    public int startPrice = 20;
+    public int startPrice = 100;
     public float upgradePriceMultiplier;
     public float FaithPerUpgrade = 0.1f;
 
     [Header("Managers")]
     public GameManager gameManager;
-    int level = 0;
+    public int level = 0;
+    public int faithLevel = 0;
+    public int populationLevel = 0;
 
     private void Start()
     {
         UpdateUI();
     }
 
-    public void ClickUpgrade()
+    public void ClickFaithUpgrade()
     {
-        int price = CalculatePrice();
-        bool purchaseSuccess = gameManager.PurchaseAction(price);
+        int faithPrice = CalculateFaithPrice();
+
+        bool purchaseSuccess = gameManager.PurchaseAction(faithPrice);
         if (purchaseSuccess)
         {
-            level++;
+            faithLevel++;
+            UpdateUI();
+        }
+    }
+
+    public void ClickPopulationUpgrade()
+    {
+        int populationPrice = CalculatePopulationPrice();
+
+        bool purchaseSuccess = gameManager.PurchaseAction(populationPrice);
+        if (purchaseSuccess)
+        {
+            populationLevel++;
             UpdateUI();
         }
     }
     private void UpdateUI()
     {
-        priceText.text = CalculatePrice().ToString();
+        populationPriceText.text = CalculatePopulationPrice().ToString();
+        faithPriceText.text = CalculateFaithPrice().ToString();
         incomeInfoText.text = level.ToString() + " x " + FaithPerUpgrade + "/S";
     }
-    int CalculatePrice()
+    int CalculateFaithPrice()
     {
-        int price = Mathf.RoundToInt(startPrice * Mathf.Pow(upgradePriceMultiplier, level));
+        int price = Mathf.RoundToInt(Mathf.Pow(startPrice, faithLevel + 1) * upgradePriceMultiplier);
+        return price;
+    }
+    int CalculatePopulationPrice()
+    {
+        int price = Mathf.RoundToInt(Mathf.Pow(startPrice, populationLevel + 1) * upgradePriceMultiplier);
         return price;
     }
 
     public float CalculateFaithPerSecond()
     {
         return FaithPerUpgrade * level;
+        
     }
 }
