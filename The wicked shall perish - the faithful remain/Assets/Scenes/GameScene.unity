@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 290656960}
   - component: {fileID: 290656959}
   m_Layer: 5
-  m_Name: Price
+  m_Name: populationPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -670,6 +670,7 @@ MonoBehaviour:
   populationPriceText: {fileID: 290656959}
   incomeInfoText: {fileID: 1613753372}
   startPrice: 100
+  populationStartPrice: 100
   upgradePriceMultiplier: 0.1
   FaithPerUpgrade: 0.1
   gameManager: {fileID: 1387813446}
@@ -979,6 +980,7 @@ MonoBehaviour:
   populationPriceText: {fileID: 290656959}
   incomeInfoText: {fileID: 1254860414}
   startPrice: 100
+  populationStartPrice: 100
   upgradePriceMultiplier: 0.1
   FaithPerUpgrade: 0.1
   gameManager: {fileID: 1387813446}
@@ -2015,7 +2017,7 @@ GameObject:
   - component: {fileID: 1409677850}
   - component: {fileID: 1409677849}
   m_Layer: 5
-  m_Name: Button
+  m_Name: TheButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2110,7 +2112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2421,7 +2423,7 @@ GameObject:
   - component: {fileID: 1568082398}
   - component: {fileID: 1568082397}
   m_Layer: 5
-  m_Name: Price
+  m_Name: faithPrice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3041,8 +3043,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21
-  m_fontSizeBase: 21
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3789,60 +3791,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958090575}
   m_CullTransparentMesh: 1
---- !u!1 &2024432600
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2024432602}
-  - component: {fileID: 2024432601}
-  m_Layer: 0
-  m_Name: upgradeManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2024432601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024432600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bca74affde3e72d44a7c7c5a0be32210, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Upgrades
-  faithPriceText: {fileID: 1568082397}
-  populationPriceText: {fileID: 290656959}
-  incomeInfoText: {fileID: 1613753372}
-  startPrice: 100
-  upgradePriceMultiplier: 0
-  FaithPerUpgrade: 0.1
-  gameManager: {fileID: 1387813446}
-  level: 0
-  faithLevel: 0
-  populationLevel: 0
---- !u!4 &2024432602
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024432600}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1122.3586, y: 86.34375, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2041788006
 GameObject:
   m_ObjectHideFlags: 0
@@ -3992,4 +3940,3 @@ SceneRoots:
   - {fileID: 383181639}
   - {fileID: 1721384368}
   - {fileID: 1387813445}
-  - {fileID: 2024432602}

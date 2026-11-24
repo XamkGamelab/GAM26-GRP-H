@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GlobalResources : MonoBehaviour
 {
     //Hidden static float
-    public static float faithCount =0;
+    public static float faithCount = 0;
     public static float populationCount = 0;
     public static float moneyCount = 0;
     public static float foodCount = 0;
@@ -76,6 +76,15 @@ public class GlobalResources : MonoBehaviour
     
     private void Start()
     {
+        faithCount = 0;
+        populationCount = 0;
+        moneyCount = 0;
+        foodCount = 0;
+        housingCount = 0;
+        militiaCount = 0;
+        hereticCount = 0;
+        
+
         faithUpgradeLevel = faithUpgrades.GetComponent<Upgrades>().faithLevel;
         populationUpgradeLevel = populationUpgrades.GetComponent<Upgrades>().populationLevel;
 
