@@ -1,7 +1,8 @@
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 using UnityEngine.Assemblies;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Upgrades : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Upgrades : MonoBehaviour
 
     [Header("Generator values")]
     public int startPrice = 100;
+    public int populationStartPrice = 100;
     public float upgradePriceMultiplier;
     public float FaithPerUpgrade = 0.1f;
 
@@ -23,9 +25,15 @@ public class Upgrades : MonoBehaviour
 
     private void Start()
     {
-        UpdateUI();
+        UpdateUI(0);
+        UpdateUI(1);
     }
 
+    void Update()
+    {
+        //UpdateUI();
+
+    }
     public void ClickFaithUpgrade()
     {
         int faithPrice = CalculateFaithPrice();
@@ -34,7 +42,7 @@ public class Upgrades : MonoBehaviour
         if (purchaseSuccess)
         {
             faithLevel++;
-            UpdateUI();
+            UpdateUI(0);
         }
     }
 
@@ -46,24 +54,21 @@ public class Upgrades : MonoBehaviour
         if (purchaseSuccess)
         {
             populationLevel++;
-            UpdateUI();
+            UpdateUI(1);
+           
         }
     }
-    private void UpdateUI()
-    {
-        populationPriceText.text = CalculatePopulationPrice().ToString();
-        faithPriceText.text = CalculateFaithPrice().ToString();
-        incomeInfoText.text = level.ToString() + " x " + FaithPerUpgrade + "/S";
-    }
+    
     int CalculateFaithPrice()
     {
-        int price = Mathf.RoundToInt(Mathf.Pow(startPrice, faithLevel + 1) * upgradePriceMultiplier);
-        return price;
+        int faithPrice = Mathf.RoundToInt(Mathf.Pow(startPrice, faithLevel + 1) * upgradePriceMultiplier); 
+        return faithPrice;
+        
     }
     int CalculatePopulationPrice()
     {
-        int price = Mathf.RoundToInt(Mathf.Pow(startPrice, populationLevel + 1) * upgradePriceMultiplier);
-        return price;
+        int populationPrice = Mathf.RoundToInt(Mathf.Pow(populationStartPrice, populationLevel + 1) * upgradePriceMultiplier);
+        return populationPrice;
     }
 
     public float CalculateFaithPerSecond()
@@ -71,4 +76,36 @@ public class Upgrades : MonoBehaviour
         return FaithPerUpgrade * level;
         
     }
+
+    void UpdateUI(int upgradeID)
+    {
+        switch (upgradeID)
+        {
+            case 0:
+                faithPriceText.text = CalculateFaithPrice().ToString();
+                break;
+
+            case 1:
+                populationPriceText.text = CalculatePopulationPrice().ToString();
+                break;
+        }
+    }
+    /*private void UpdateUI()
+    {
+        /* populationPriceText.text = CalculatePopulationPrice().ToString();
+         Debug.Log(populationPriceText.text);
+         faithPriceText.text = CalculateFaithPrice().ToString();
+         //incomeInfoText.text = level.ToString() + " x " + FaithPerUpgrade + "/S";
+       
+        
+         int faithPrice = CalculateFaithPrice();
+         int populationPrice = CalculatePopulationPrice();
+
+         Debug.Log($"Faith: {faithPrice}");
+         Debug.Log($"Population: {populationPrice}");
+
+         faithPriceText.text = faithPrice.ToString();
+         populationPriceText.text = populationPrice.ToString();
+      
+    }*/
 }
