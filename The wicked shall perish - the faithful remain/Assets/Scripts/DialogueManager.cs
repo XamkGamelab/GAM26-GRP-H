@@ -9,12 +9,13 @@ public class DialogueManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
+    int currentpage = 1;
 
     private Queue<string> sentences;
 
     void Start()
     {
-     sentences = new Queue<string>();   
+        sentences = new Queue<string>();   
     }
 
     public void StartDialogue (Dialogue dialogue)
@@ -32,6 +33,28 @@ public class DialogueManager : MonoBehaviour
         DisplayNextSentence();
     }
 
+
+
+    public void ButtonNextPage()
+    {
+            int totalpages = dialogueText.textInfo.pageCount;   
+
+            if (currentpage < totalpages)
+            {
+                currentpage++;
+                dialogueText.pageToDisplay++;
+            }
+    }
+    public void ButtonPrevPage()
+    {
+            int totalpages = dialogueText.textInfo.pageCount;   
+
+            if (currentpage > 0)
+            {
+                currentpage--;
+                dialogueText.pageToDisplay--;
+            }
+    }
    
     public void DisplayNextSentence ()
     {
@@ -57,6 +80,6 @@ public class DialogueManager : MonoBehaviour
     }
     void EndDialogue ()
     {
-        Debug.Log("End of the converstation.");
+        Debug.Log("End of the conversation.");
     }
 }
