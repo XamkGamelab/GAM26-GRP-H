@@ -37,23 +37,21 @@ public class DialogueManager : MonoBehaviour
 
     public void ButtonNextPage()
     {
-            int totalpages = dialogueText.textInfo.pageCount;   
+        int totalpages = dialogueText.textInfo.pageCount;   
 
-            if (currentpage < totalpages)
-            {
-                currentpage++;
-                dialogueText.pageToDisplay++;
-            }
+        if (currentpage < totalpages)
+        {
+            currentpage++;
+            dialogueText.pageToDisplay++;
+        }
     }
     public void ButtonPrevPage()
-    {
-            int totalpages = dialogueText.textInfo.pageCount;   
-
-            if (currentpage > 0)
-            {
-                currentpage--;
-                dialogueText.pageToDisplay--;
-            }
+    {  
+        if (currentpage > 0)
+        {
+            currentpage--;
+            dialogueText.pageToDisplay--;
+        }
     }
    
     public void DisplayNextSentence ()
