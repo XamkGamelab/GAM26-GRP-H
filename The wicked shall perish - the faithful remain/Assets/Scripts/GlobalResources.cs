@@ -73,6 +73,9 @@ public class GlobalResources : MonoBehaviour
     public GameObject faithUpgrades;
     public GameObject populationUpgrades;
 
+    //Test variables
+    public float currentDisplayScore = 0;
+
     
     private void Start()
     {
@@ -91,6 +94,8 @@ public class GlobalResources : MonoBehaviour
     }
     private void Update()
     {
+        
+
         InternalFaith = faithCount;
         InternalMoney = moneyCount;
         InternalPopulation = populationCount;
@@ -110,7 +115,9 @@ public class GlobalResources : MonoBehaviour
         {
             if(populationUpgradeLevel >= 1)
             {
+                //currentDisplayScore = populationCount;
                 PopulationGen();
+                
             }
             if(foodUpgradeLevel >= 1)
             {
@@ -136,16 +143,32 @@ public class GlobalResources : MonoBehaviour
 
         }
 
+        //
+        StartCoroutine(CountUpToTarget());
+        //
+
 
     }
-
+    //
+    IEnumerator CountUpToTarget()
+    {
+        while (currentDisplayScore < populationCount)
+        {
+            currentDisplayScore += Time.deltaTime;
+            currentDisplayScore = Mathf.Clamp(currentDisplayScore, 0f, populationCount);
+            populationLabel.text = "Population: " + Mathf.RoundToInt(currentDisplayScore).ToString();
+            //populationLabel.text = "Population: " + currentDisplayScore;
+            yield return null;
+        }
+    }
+    //
     
 
     public void UpdateUI()
     {
         faithLabel.text = "Faith: " + Mathf.RoundToInt(faithCount).ToString();//"Faith: " + faithCount;
         moneyLabel.text = "Money: " + Mathf.RoundToInt(moneyCount).ToString();//moneyCount;
-        populationLabel.text = "Population: " + Mathf.RoundToInt(populationCount).ToString(); //populationCount;
+        //populationLabel.text = "Population: " + Mathf.RoundToInt(populationCount).ToString(); //populationCount;
         foodLabel.text = "Food: " + Mathf.RoundToInt(foodCount).ToString(); //foodCount;
         housingLabel.text = "Housing: " + Mathf.RoundToInt(housingCount).ToString(); //housingCount;
         militiaLabel.text = "Militia: " + Mathf.RoundToInt(militiaCount).ToString();// militiaCount;
