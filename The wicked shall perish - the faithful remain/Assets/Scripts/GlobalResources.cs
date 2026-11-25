@@ -64,14 +64,17 @@ public class GlobalResources : MonoBehaviour
     //buy variables
     [Header("Buy event values")]
     public float missionaryTrip = 1;
-    public float buyFood;
-    public float buyHousing;
-    public float buyMilitia;
+    public float buyFood = 1;
+    public float buyHousing = 1;
+    public float buyMilitia = 1;
 
     //click variables
 
     public GameObject faithUpgrades;
     public GameObject populationUpgrades;
+    public GameObject foodUpgrades;
+    public GameObject housingUpgrades;
+    public GameObject militiaUpgrades;
 
     //Test variables
     public float currentDisplayScore = 0;
@@ -89,7 +92,10 @@ public class GlobalResources : MonoBehaviour
         
 
         faithUpgradeLevel = faithUpgrades.GetComponent<Upgrades>().faithLevel;
+        militiaUpgradeLevel = militiaUpgrades.GetComponent<Upgrades>().militiaLevel;
         populationUpgradeLevel = populationUpgrades.GetComponent<Upgrades>().populationLevel;
+        foodUpgradeLevel = foodUpgrades.GetComponent<Upgrades>().foodLevel;
+        housingUpgradeLevel = housingUpgrades.GetComponent<Upgrades>().housingLevel;
 
     }
     private void Update()
@@ -106,6 +112,9 @@ public class GlobalResources : MonoBehaviour
 
         populationUpgradeLevel = populationUpgrades.GetComponent<Upgrades>().populationLevel;
         faithUpgradeLevel = faithUpgrades.GetComponent<Upgrades>().faithLevel;
+        foodUpgradeLevel = foodUpgrades.GetComponent<Upgrades>().foodLevel;
+        housingUpgradeLevel = housingUpgrades.GetComponent<Upgrades>().housingLevel;
+        militiaUpgradeLevel = militiaUpgrades.GetComponent<Upgrades>().militiaLevel;
 
         UpdateUI();
         
@@ -119,24 +128,24 @@ public class GlobalResources : MonoBehaviour
                 PopulationGen();
                 
             }
-            if(foodUpgradeLevel >= 1)
+            if (foodUpgradeLevel >= 4)
             {
                 FoodGen();
             }
-            if(housingUpgradeLevel >= 1)
+            if (housingUpgradeLevel >= 4)
             {
                 HousingGen();
             }
-            if(militiaUpgradeLevel >= 1)
+            if (militiaUpgradeLevel >= 4)
             {
                 MilitiaGen();
             }
-            else
-            {
+             
+            
                 FaithGen();
                 MoneyGen();
                 HereticGen();
-            }
+            
             
            
             nextTimeCheck = Time.timeSinceLevelLoad + 1f;
@@ -178,9 +187,9 @@ public class GlobalResources : MonoBehaviour
 
     public void PopulationGen()
     {
-        populationCount += (Mathf.Pow(populationConstant, 1 + populationUpgradeLevel)) * GrowthLimiter;
+        populationCount += (Mathf.Pow(populationConstant, 1 + populationUpgradeLevel)) * GrowthLimiter;// tähän mukaan ne upgrade arvot
     }
-    public void PopulationClick()
+    public void PopulationClick()//The Button
     {
         populationCount+= missionaryTrip;
     }
@@ -213,11 +222,19 @@ public class GlobalResources : MonoBehaviour
         housingCount += (Mathf.Pow(housingConstant, 1 + housingUpgradeLevel)) * GrowthLimiter;
     }
 
+    public void HouseBuy()
+    {
+        housingCount += buyHousing;
+    }
     public void MilitiaGen()
     {
         militiaCount += (Mathf.Pow(militiaConstant, 1 + militiaUpgradeLevel)) * GrowthLimiter;
     }
 
+    public void MilitiaBuy()
+    {
+        militiaCount += buyMilitia;
+    }
     public void HereticGen()
     {
         hereticCount = populationCount * HereticMultiplier;

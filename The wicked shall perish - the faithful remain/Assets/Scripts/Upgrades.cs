@@ -9,21 +9,29 @@ public class Upgrades : MonoBehaviour
     [Header("Components")]
     public TextMeshProUGUI faithPriceText;
     public TextMeshProUGUI populationPriceText;
+    public TextMeshProUGUI foodPriceText;
+    public TextMeshProUGUI housingPriceText;
     public TextMeshProUGUI militiaPriceText;
     public TextMeshProUGUI incomeInfoText;
 
     [Header("Generator values")]
-    public int startPrice = 100;
-    public int populationStartPrice = 100;
-    public int militiaStartPrice = 100;
+    private int startPrice = 100;
+    private int populationStartPrice = 100;
+    private int foodStartPrice = 100;
+    private int militiaStartPrice = 100;
+    private int housingStartPrice = 100;
     public float upgradePriceMultiplier;
+   
     //public float FaithPerUpgrade = 0.1f;
 
     [Header("Managers")]
     public GameManager gameManager;
+    public GlobalResources globalResources;
     public int level = 0;
     public int faithLevel = 0;
     public int populationLevel = 0;
+    public int foodLevel = 0;
+    public int housingLevel = 0;
     public int militiaLevel = 0;
 
     private void Start()
@@ -31,6 +39,8 @@ public class Upgrades : MonoBehaviour
         UpdateUI(0);
         UpdateUI(1);
         UpdateUI(2);
+        UpdateUI(3);
+        UpdateUI(4);
     }
 
     void Update()
@@ -69,12 +79,41 @@ public class Upgrades : MonoBehaviour
         bool purchaseSuccess = gameManager.PurchaseActionMoney(militiaPrice);
         if (purchaseSuccess)
         {
+            globalResources.MilitiaBuy();
             militiaLevel++;
             UpdateUI(2);
            
         }
     }
+    public void ClickFoodUpgrade()
+    {
+        int foodPrice = CalculateFoodPrice();
+
+        bool purchaseSuccess = gameManager.PurchaseActionMoney(foodPrice);
+        if (purchaseSuccess)
+        {
+            foodLevel++;
+            globalResources.FoodBuy();
+            UpdateUI(3);
+           
+        }
+    }
     
+    public void ClickHousingUpgrade()
+    {
+        int housingPrice = CalculateHousingPrice();
+
+        bool purchaseSuccess = gameManager.PurchaseActionMoney(housingPrice);
+        if (purchaseSuccess)
+        {
+            housingLevel++;
+            globalResources.HouseBuy();
+            UpdateUI(4);
+           
+        }
+    }
+    
+    // Calculations for each upgrade prices
     int CalculateFaithPrice()
     {
         int faithPrice = Mathf.RoundToInt(Mathf.Pow(startPrice, faithLevel + 1) * upgradePriceMultiplier); 
@@ -86,10 +125,21 @@ public class Upgrades : MonoBehaviour
         int populationPrice = Mathf.RoundToInt(Mathf.Pow(populationStartPrice, populationLevel + 1) * upgradePriceMultiplier);
         return populationPrice;
     }
+    //Upgrades use money
     int CalculateMilitiaPrice()
     {
         int militiaPrice = Mathf.RoundToInt(Mathf.Pow(militiaStartPrice, militiaLevel + 1) * upgradePriceMultiplier);
         return militiaPrice;
+    }
+    int CalculateFoodPrice()
+    {
+        int foodPrice = Mathf.RoundToInt(Mathf.Pow(foodStartPrice, foodLevel + 1) * upgradePriceMultiplier);
+        return foodPrice;
+    }
+    int CalculateHousingPrice()
+    {
+        int housingPrice = Mathf.RoundToInt(Mathf.Pow(housingStartPrice, housingLevel + 1) * upgradePriceMultiplier);
+        return housingPrice;
     }
 
     /*public float CalculateFaithPerSecond()
@@ -103,19 +153,27 @@ public class Upgrades : MonoBehaviour
         switch (upgradeID)
         {
             case 0:
-                faithPriceText.text = CalculateFaithPrice().ToString();
-                incomeInfoText.text = "Level: " + faithLevel.ToString() + " x " + "/S";
+                faithPriceText.text = "Cost: " + CalculateFaithPrice().ToString();
+                incomeInfoText.text = "Level: " + faithLevel.ToString();
                 
                 break;
 
             case 1:
-                populationPriceText.text = CalculatePopulationPrice().ToString();
-                incomeInfoText.text = "Level: " + populationLevel.ToString() + " x " + "/S";
+                populationPriceText.text = "Cost: " + CalculatePopulationPrice().ToString();
+                incomeInfoText.text = "Level: " + populationLevel.ToString();
                 break;
 
             case 2:
-                militiaPriceText.text = CalculateMilitiaPrice().ToString();
-                incomeInfoText.text = "Level: " + militiaLevel.ToString() + " x " + "/S";
+                militiaPriceText.text = "Cost: " + CalculateMilitiaPrice().ToString();
+                incomeInfoText.text = "Level: " + militiaLevel.ToString();
+                break;
+            case 3:
+                foodPriceText.text = "Cost: " + CalculateFoodPrice().ToString();
+                incomeInfoText.text = "Level: " + foodLevel.ToString();
+                break;
+            case 4:
+                housingPriceText.text = "Cost: " + CalculateHousingPrice().ToString();
+                incomeInfoText.text = "Level: " + housingLevel.ToString();
                 break;
         }
     }
