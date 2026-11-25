@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI incomeText;
     [SerializeField] Upgrades[] upgrades;
 
-    float lastFaithValue = 0;
+    //float lastFaithValue = 0;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        IdleCalculate();
+        //IdleCalculate();
     }
 
     void UpdateUI()
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     }
     
 
-    void IdleCalculate()
+    /*void IdleCalculate()
     {
         float sum = 0;
         foreach (var Upgrades in upgrades)
@@ -36,13 +36,22 @@ public class GameManager : MonoBehaviour
         }
         incomeText.text = lastFaithValue.ToString() + "/S";
         lastFaithValue = sum;
-    }
+    }*/
 
     public bool PurchaseAction(int cost)
     {
         if (GlobalResources.faithCount >= cost)
         {
             GlobalResources.faithCount -= cost;
+            return true;
+        }
+        return false;
+    }
+    public bool PurchaseActionMoney(int cost)
+    {
+        if (GlobalResources.moneyCount >= cost)
+        {
+            GlobalResources.moneyCount -= cost;
             return true;
         }
         return false;
