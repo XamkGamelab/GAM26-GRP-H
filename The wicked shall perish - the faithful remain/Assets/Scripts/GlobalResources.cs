@@ -1,8 +1,9 @@
-using TMPro;
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GlobalResources : MonoBehaviour
 {
@@ -79,8 +80,8 @@ public class GlobalResources : MonoBehaviour
     //Test variables
     public float currentDisplayScore = 0;
 
-    
-    private void Start()
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void ResetStatic()
     {
         faithCount = 0;
         populationCount = 0;
@@ -89,8 +90,14 @@ public class GlobalResources : MonoBehaviour
         housingCount = 0;
         militiaCount = 0;
         hereticCount = 0;
+
+    }
+
+    private void Start()
+    {
         
 
+        
         faithUpgradeLevel = faithUpgrades.GetComponent<Upgrades>().faithLevel;
         militiaUpgradeLevel = militiaUpgrades.GetComponent<Upgrades>().militiaLevel;
         populationUpgradeLevel = populationUpgrades.GetComponent<Upgrades>().populationLevel;
@@ -98,6 +105,7 @@ public class GlobalResources : MonoBehaviour
         housingUpgradeLevel = housingUpgrades.GetComponent<Upgrades>().housingLevel;
 
     }
+   
     private void Update()
     {
         

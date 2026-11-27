@@ -4,9 +4,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    GlobalResources GlobalResources;
+    GlobalResources globalResources;
     public TextMeshProUGUI incomeText;
     [SerializeField] Upgrades[] upgrades;
+
+    
+    
 
     //float lastFaithValue = 0;
 
@@ -18,15 +21,12 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+        
+        
         //IdleCalculate();
     }
 
-    void UpdateUI()
-    {
-
-    }
-    
-
+ 
     /*void IdleCalculate()
     {
         float sum = 0;
@@ -56,4 +56,6 @@ public class GameManager : MonoBehaviour
         }
         return false;
     }
+
+   
 }
